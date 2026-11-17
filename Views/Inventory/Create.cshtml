@@ -1,0 +1,60 @@
+﻿
+@model WebApplication3.Models.InventoryItem
+
+@{
+    ViewBag.Title = "Add Inventory Item";
+}
+
+<h2>Add Inventory Item</h2>
+
+@using (Html.BeginForm("Create", "Inventory", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ItemName)
+        @Html.TextBoxFor(m => m.ItemName,
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ItemName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        @Html.TextBoxFor(m => m.Category,
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Category)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Quantity)
+        @Html.TextBoxFor(m => m.Quantity,
+            new { @class = "form-control", type = "number", min = "0" })
+        @Html.ValidationMessageFor(m => m.Quantity)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price,
+            new
+                 {
+                     @class = "form-control",
+                     type = "number",
+                  min = "0",
+                     step = "0.01"
+                 })
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Supplier)
+        @Html.TextBoxFor(m => m.Supplier,
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Supplier)
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-success">Save Item</button>
+    @Html.ActionLink("Back to Inventory", "Index",
+        null, new { @class = "btn btn-default" })
+}

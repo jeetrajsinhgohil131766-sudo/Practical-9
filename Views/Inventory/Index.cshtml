@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<WebApplication3.Models.InventoryItem>
+
+@{
+    ViewBag.Title = "Inventory Management";
+}
+
+<h2>Inventory Management</h2>
+
+<p>
+    @Html.ActionLink("Add New Item", "Create", null,
+        new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Item Name</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ItemId</td>
+            <td>@item.ItemName</td>
+            <td>@item.Category</td>
+            <td>@item.Quantity</td>
+            <td>@item.Price.ToString("0.00")</td>
+            <td>@item.Supplier</td>
+            <td>
+                @Html.ActionLink("Details", "Details",
+                    new { id = item.ItemId }) |
+                @Html.ActionLink("Edit", "Edit",
+                    new { id = item.ItemId }) |
+                @Html.ActionLink("Delete", "Delete",
+                    new { id = item.ItemId })
+            </td>
+        </tr>
+    }
+</table>
